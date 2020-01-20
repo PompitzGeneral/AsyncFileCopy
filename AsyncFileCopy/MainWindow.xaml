@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsyncFileCopy"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="AsyncCopy" Height="200" Width="350">
     <Grid>
-        
+        <StackPanel>
+            <Grid Margin="15,15,15,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Source : "  />
+                <TextBox   Grid.Column="1" Text="{Binding SourceFilePath}" />
+                <Button    Grid.Column="2" Content="..." 
+                           Command="{Binding SourceFileOpenCommand}" Margin="10,0,0,0"/>
+            </Grid>
+            <Grid Margin="15,10,15,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Dest    : "  />
+                <TextBox   Grid.Column="1" Text="{Binding DestinationFilePath}"/>
+                <Button    Grid.Column="2" Content="..." 
+                           Command="{Binding DestinationFileSaveCommand}"
+                           Margin="10,0,0,0"/>
+            </Grid>
+            <Grid Margin="15,15,15,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Async Copy" Command="{Binding AsyncCopyCommand}" Margin="0,0,10,0"/>
+                <Button Grid.Column="1" Content="Sync Copy"  Command="{Binding CopyCommand}"  Margin="5,0,5,0"/>
+                <Button Grid.Column="2" Content="Clear"     Command="{Binding ClearCommand}" Margin="10,0,0,0"/>
+            </Grid>
+            <ProgressBar Height="30" Value="{Binding ProgressPercentage, UpdateSourceTrigger=PropertyChanged}" 
+                         Maximum="100" Minimum="0"
+                         Margin="15, 15, 15, 0"/>
+        </StackPanel>
     </Grid>
 </Window>
