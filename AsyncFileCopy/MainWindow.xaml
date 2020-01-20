@@ -15,7 +15,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Source : "  />
-                <TextBox   Grid.Column="1" Text="{Binding SourceFilePath}" />
+                <TextBox Name="tbxSource"  Grid.Column="1" Text="{Binding SourceFilePath}" />
                 <Button    Grid.Column="2" Content="..." 
                            Command="{Binding SourceFileOpenCommand}" Margin="10,0,0,0"/>
             </Grid>
@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Dest    : "  />
-                <TextBox   Grid.Column="1" Text="{Binding DestinationFilePath}"/>
+                <TextBox   Grid.Column="1" Name="tbxDest"  Text="{Binding DestinationFilePath}"/>
                 <Button    Grid.Column="2" Content="..." 
                            Command="{Binding DestinationFileSaveCommand}"
                            Margin="10,0,0,0"/>
@@ -37,13 +37,16 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Async Copy" Command="{Binding AsyncCopyCommand}" Margin="0,0,10,0"/>
+                <Button Grid.Column="0" Content="Async Copy"  Margin="0,0,10,0" Click="Button_Click"/>
+                <!--Command="{Binding AsyncCopyCommand}"-->
                 <Button Grid.Column="1" Content="Sync Copy"  Command="{Binding CopyCommand}"  Margin="5,0,5,0"/>
                 <Button Grid.Column="2" Content="Clear"     Command="{Binding ClearCommand}" Margin="10,0,0,0"/>
             </Grid>
-            <ProgressBar Height="30" Value="{Binding ProgressPercentage, UpdateSourceTrigger=PropertyChanged}" 
+            <ProgressBar Height="30" 
+                         Name="Progressbar"
                          Maximum="100" Minimum="0"
                          Margin="15, 15, 15, 0"/>
+            <!--Value="{Binding ProgressPercentage, UpdateSourceTrigger=PropertyChanged}"-->
         </StackPanel>
     </Grid>
 </Window>

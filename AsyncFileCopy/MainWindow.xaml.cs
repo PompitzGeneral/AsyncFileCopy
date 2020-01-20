@@ -1,6 +1,7 @@
 ﻿using AsyncFileCopy.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,28 @@ namespace AsyncFileCopy
             InitializeComponent();
 
             this.DataContext = new MainViewModel();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            long totalCopied = 0;
+
+            using ( FileStream sourceFileStream = new FileStream( this.tbxSource.Text, FileMode.Open ) )
+            {
+                using ( FileStream destFileStream = new FileStream( this.tbxDest.Text, FileMode.Create ) )
+                {
+                    byte[] buffer = new byte[1024 * 1024];
+                    int nRead = 0;
+
+                    while ( ( nRead = await sourceFileStream.ReadAsync( buffer, 0, buffer.Length) ) != 0 )
+                    {
+                        await destFileStream.WriteAsync( buffer, 0, nRead );
+                        totalCopied += nRead;
+
+                        this.Progressbar.Value = (int)( ( (double)totalCopied / (double)sourceFileStream.Length ) * 100 );
+                    }
+                }
+            }
         }
     }
 }

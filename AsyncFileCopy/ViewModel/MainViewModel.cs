@@ -100,7 +100,7 @@ namespace AsyncFileCopy.ViewModel
                         await destFileStream.WriteAsync( buffer, 0, nRead );
                         totalCopied += nRead;
 
-                        ProgressPercentage = (int)( ( (double)totalCopied / (double)destFileStream.Length ) * 100 );
+                        ProgressPercentage = (int)( ( (double)totalCopied / (double)sourceFileStream.Length ) * 100 );
                     }
                 }
             }
@@ -122,7 +122,7 @@ namespace AsyncFileCopy.ViewModel
                         destFileStream.Write( buffer, 0, nRead );
                         totalCopied += nRead;
 
-                        ProgressPercentage = (int)( ( (double)totalCopied / (double)destFileStream.Length ) * 100 );
+                        ProgressPercentage = (int)( ( (double)totalCopied / (double)sourceFileStream.Length ) * 100 );
                     }
                 }
             }
